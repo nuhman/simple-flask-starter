@@ -1,4 +1,5 @@
-from flask import render_template, jsonify
+import json
+from flask import render_template, Response
 from app import app
 
 @app.route('/')
@@ -8,11 +9,11 @@ def index():
     return render_template('index.html', title='Home', user=user)
 
 
-@app.route('/api/users')
+@app.route('/users')
 def users():
     all_users = [
         {'username': 'Tendulkar'},
         {'username': 'Federrer'},
         {'username': 'Modirc'}
     ]
-    return jsonify(all_users)
+    return Response(json.dumps(all_users), mimetype='application/json')
